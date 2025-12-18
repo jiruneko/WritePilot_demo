@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>{{ title or "WritePilot Demo" }}</title>
+  </head>
+  <body class="bg-slate-50 text-slate-900">
+    <header class="border-b bg-white">
+      <div class="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
+        <a href="/ui" class="font-semibold text-lg">WritePilot Demo</a>
+        <div class="flex gap-2">
+          <a href="/docs" class="text-sm underline">API Docs</a>
+          <a href="/ui/new" class="text-sm bg-slate-900 text-white px-3 py-2 rounded-lg">New</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-5xl px-4 py-6">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer class="mx-auto max-w-5xl px-4 py-8 text-sm text-slate-500">
+      Local demo UI (Jinja2 + Tailwind CDN)
+    </footer>
+  </body>
+</html>

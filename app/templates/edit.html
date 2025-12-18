@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <h1 class="text-2xl font-semibold">Edit</h1>
+      <p class="text-slate-600">id={{ a.id }}</p>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <!-- Rewrite -->
+      <form method="post" action="/ui/articles/{{ a.id }}/rewrite" class="flex items-center gap-2">
+        <select name="tone" class="border rounded-lg px-3 py-2 text-sm bg-white">
+          <option value="friendly" {% if a.tone == "friendly" %}selected{% endif %}>friendly</option>
+          <option value="casual" {% if a.tone == "casual" %}selected{% endif %}>casual</option>
+          <option value="professional" {% if a.tone == "professional" %}selected{% endif %}>professional</option>
+          <option value="confident" {% if a.tone == "confident" %}selected{% endif %}>confident</option>
+        </select>
+        <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm">Rewrite</button>
+      </form>
+
+      <!-- Delete -->
+      <form method="post" action="/ui/articles/{{ a.id }}/delete">
+        <button class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm">Delete</button>
+      </form>
+    </div>
+  </div>
+
+  <form class="mt-6 bg-white border rounded-xl p-6 grid gap-4" method="post" action="/ui/articles/{{ a.id }}/update">
+    <div>
+      <label class="block text-sm font-medium mb-1">Title</label>
+      <input name="title" required class="w-full border rounded-lg px-3 py-2" value="{{ a.title }}" />
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium mb-1">Audience</label>
+        <input name="audience" required class="w-full border rounded-lg px-3 py-2" value="{{ a.audience }}" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium mb-1">Tone</label>
+        <select name="tone" class="w-full border rounded-lg px-3 py-2 bg-white">
+          <option value="friendly" {% if a.tone == "friendly" %}selected{% endif %}>friendly</option>
+          <option value="casual" {% if a.tone == "casual" %}selected{% endif %}>casual</option>
+          <option value="professional" {% if a.tone == "professional" %}selected{% endif %}>professional</option>
+          <option value="confident" {% if a.tone == "confident" %}selected{% endif %}>confident</option>
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1">Article</label>
+      <textarea name="content" rows="18" class="w-full border rounded-lg px-3 py-2 font-mono text-sm">{{ a.content }}</textarea>
+      <div class="mt-2 text-xs text-slate-500">
+        created: {{ a.created_at }} / updated: {{ a.updated_at }}
+      </div>
+    </div>
+
+    <div class="flex gap-2">
+      <button class="bg-slate-900 text-white px-4 py-2 rounded-lg">Save</button>
+      <a href="/ui" class="px-4 py-2 rounded-lg border bg-white">Back</a>
+    </div>
+  </form>
+{% endblock %}
